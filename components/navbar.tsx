@@ -14,56 +14,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Menu } from "lucide-react";
-
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Digital Transformation",
-    href: "/services/digital-transformation",
-    description: "Transform your business with cutting-edge digital solutions.",
-  },
-  {
-    title: "Cloud Services",
-    href: "/services/cloud",
-    description: "Scalable cloud solutions for modern enterprises.",
-  },
-  {
-    title: "AI & Machine Learning",
-    href: "/services/ai-ml",
-    description: "Harness the power of AI for your business growth.",
-  },
-  {
-    title: "Custom Development",
-    href: "/services/custom-development",
-    description: "Tailored software solutions for your business",
-  },
-  {
-    title: "Data Analytics",
-    href: "/services/data-analytics",
-    description: "Transform data into actionable insights",
-  },
-  {
-    title: "Cybersecurity",
-    href: "/services/cybersecurity",
-    description: "Advanced security solutions and consulting",
-  },
-  {
-    title: "Mobile Development",
-    href: "/services/mobile-development",
-    description: "Native and cross-platform mobile apps",
-  },
-  {
-    title: "Process Automation",
-    href: "/services/process-automation",
-    description: "Streamline operations with intelligent automation",
-  },
-];
+import { serviceLinks } from "@/config/site";
 
 export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-8 flex items-center space-x-2">
-          <span className="text-xl font-bold ml-4">TechForge</span>
+          <span className="text-xl font-bold ml-4">TechForgers</span>
         </Link>
 
         <div className="hidden md:flex md:flex-1">
@@ -73,13 +31,13 @@ export function Navbar() {
                 <NavigationMenuTrigger>Services</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    {components.map((component) => (
+                    {serviceLinks.map((service) => (
                       <ListItem
-                        key={component.title}
-                        title={component.title}
-                        href={component.href}
+                        key={service.title}
+                        title={service.title}
+                        href={service.href}
                       >
-                        {component.description}
+                        {service.description}
                       </ListItem>
                     ))}
                   </ul>
