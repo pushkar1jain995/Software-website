@@ -157,22 +157,22 @@ export default function ServicePage({ params }: ServicePageProps) {
     <div className="container py-8">
       <h1 className="text-4xl font-bold mb-6">{serviceTitle}</h1>
       
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg mb-12">
-        <p className="text-xl text-gray-700 mb-6">{content.description}</p>
+      {/* Hero Section - Updated bg gradient */}
+      <div className="bg-gradient-to-r from-blue-950/50 to-indigo-950/50 dark:from-blue-950/20 dark:to-indigo-950/20 p-8 rounded-lg mb-12">
+        <p className="text-xl text-foreground mb-6">{content.description}</p>
         <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">
           Contact Us
         </button>
       </div>
 
-      {/* Benefits and Features Grid */}
+      {/* Benefits and Features Grid - Updated bg colors */}
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         {/* Benefits Section */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
+        <div className="bg-card p-6 rounded-lg shadow-sm">
           <h2 className="text-2xl font-semibold mb-4">Key Benefits</h2>
           <ul className="space-y-3">
             {content.benefits.map((benefit, index) => (
-              <li key={index} className="flex items-center">
+              <li key={index} className="flex items-center text-foreground">
                 <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
@@ -183,11 +183,11 @@ export default function ServicePage({ params }: ServicePageProps) {
         </div>
 
         {/* Features Section */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
+        <div className="bg-card p-6 rounded-lg shadow-sm">
           <h2 className="text-2xl font-semibold mb-4">Our Approach</h2>
           <ul className="space-y-3">
             {content.features.map((feature, index) => (
-              <li key={index} className="flex items-center">
+              <li key={index} className="flex items-center text-foreground">
                 <svg className="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -198,10 +198,10 @@ export default function ServicePage({ params }: ServicePageProps) {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-gray-50 p-8 rounded-lg text-center">
+      {/* CTA Section - Updated bg color */}
+      <div className="bg-muted p-8 rounded-lg text-center">
         <h2 className="text-2xl font-semibold mb-4">Ready to Get Started?</h2>
-        <p className="text-gray-600 mb-6">
+        <p className="text-muted-foreground mb-6">
           Let's discuss how we can help transform your business with {serviceTitle}.
         </p>
         <button className="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition">

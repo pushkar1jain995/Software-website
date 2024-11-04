@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code2, Globe2, Database } from "lucide-react";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -29,9 +30,13 @@ export function HeroSection() {
               Get Started
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline" className="h-12 px-8">
-              View Case Studies
-            </Button>
+            <Link href="/case-studies" legacyBehavior passHref>
+              <a>
+                <Button size="lg" variant="outline" className="h-12 px-8">
+                  View Case Studies
+                </Button>
+              </a>
+            </Link>
           </div>
         </motion.div>
 
