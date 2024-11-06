@@ -1,6 +1,12 @@
+'use client'
+
 // app/services/[service]/page.tsx
 import { notFound } from "next/navigation"
 import { validServices } from "@/config/site"
+import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 // Type for our service data
 type ServicePageProps = {
@@ -153,61 +159,102 @@ export default function ServicePage({ params }: ServicePageProps) {
 
   const content = serviceContent[params.service as keyof typeof serviceContent]
 
+  const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 }
+  }
+
   return (
-    <div className="container py-8">
-      <h1 className="text-4xl font-bold mb-6">{serviceTitle}</h1>
-      
-      {/* Hero Section - Updated bg gradient */}
-      <div className="bg-gradient-to-r from-blue-950/50 to-indigo-950/50 dark:from-blue-950/20 dark:to-indigo-950/20 p-8 rounded-lg mb-12">
-        <p className="text-xl text-foreground mb-6">{content.description}</p>
-        <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">
-          Contact Us
-        </button>
-      </div>
+    <motion.div 
+      initial="initial"
+      animate="animate"
+      className="container max-w-6xl py-12 space-y-12"
+    >
+      {/* Hero Section */}
+      <motion.div variants={fadeIn} className="space-y-6">
+        <Badge variant="secondary" className="px-4 py-1 text-sm">
+          Our Services
+        </Badge>
+        <h1 className="text-5xl font-bold tracking-tight">{serviceTitle}</h1>
+        <Card className="border-none bg-gradient-to-r from-blue-950/50 to-indigo-950/50 dark:from-blue-950/20 dark:to-indigo-950/20">
+          <CardContent className="p-8 space-y-6">
+            <p className="text-xl leading-relaxed">{content.description}</p>
+            <Button size="lg">
+              Contact Us
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-      {/* Benefits and Features Grid - Updated bg colors */}
-      <div className="grid md:grid-cols-2 gap-8 mb-12">
-        {/* Benefits Section */}
-        <div className="bg-card p-6 rounded-lg shadow-sm">
-          <h2 className="text-2xl font-semibold mb-4">Key Benefits</h2>
-          <ul className="space-y-3">
+      {/* Benefits and Features Grid */}
+      <motion.div 
+        variants={fadeIn}
+        className="grid md:grid-cols-2 gap-8"
+      >
+        <Card>
+          <CardHeader>
+            <h2 className="text-2xl font-semibold">Key Benefits</h2>
+          </CardHeader>
+          <CardContent className="space-y-4">
             {content.benefits.map((benefit, index) => (
-              <li key={index} className="flex items-center text-foreground">
-                <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                {benefit}
-              </li>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center gap-3"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span>{benefit}</span>
+              </motion.div>
             ))}
-          </ul>
-        </div>
+          </CardContent>
+        </Card>
 
-        {/* Features Section */}
-        <div className="bg-card p-6 rounded-lg shadow-sm">
-          <h2 className="text-2xl font-semibold mb-4">Our Approach</h2>
-          <ul className="space-y-3">
+        <Card>
+          <CardHeader>
+            <h2 className="text-2xl font-semibold">Our Approach</h2>
+          </CardHeader>
+          <CardContent className="space-y-4">
             {content.features.map((feature, index) => (
-              <li key={index} className="flex items-center text-foreground">
-                <svg className="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {feature}
-              </li>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center gap-3"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/10">
+                  <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <span>{feature}</span>
+              </motion.div>
             ))}
-          </ul>
-        </div>
-      </div>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-      {/* CTA Section - Updated bg color */}
-      <div className="bg-muted p-8 rounded-lg text-center">
-        <h2 className="text-2xl font-semibold mb-4">Ready to Get Started?</h2>
-        <p className="text-muted-foreground mb-6">
-          Let's discuss how we can help transform your business with {serviceTitle}.
-        </p>
-        <button className="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition">
-          Schedule a Consultation
-        </button>
-      </div>
-    </div>
+      {/* CTA Section */}
+      <motion.div variants={fadeIn}>
+        <Card className="border-none bg-muted">
+          <CardContent className="p-12 text-center space-y-6">
+            <h2 className="text-3xl font-semibold">Ready to Get Started?</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Let's discuss how we can help transform your business with {serviceTitle}.
+            </p>
+            <Button size="lg" className="px-8">
+              Schedule a Consultation
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </motion.div>
   )
 } 
